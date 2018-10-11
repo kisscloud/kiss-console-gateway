@@ -1,6 +1,7 @@
 package com.kiss.apigateway.filter;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.kiss.apigateway.util.JwtUtil;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
@@ -9,12 +10,15 @@ import com.netflix.zuul.http.ServletInputStreamWrapper;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StreamUtils;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -50,6 +54,7 @@ public class JWTControllerFilter extends ZuulFilter {
         System.out.println("jwt的校验开始了");
         RequestContext requestContext = RequestContext.getCurrentContext();
         HttpServletRequest request = requestContext.getRequest();
+
         String token = request.getHeader("Authorization");
         if(StringUtils.isEmpty(token)) {
             requestContext.setSendZuulResponse(false);
@@ -68,7 +73,17 @@ public class JWTControllerFilter extends ZuulFilter {
         }
 
         try {
+            InputStream in = (InputStream) requestContext.get("requestEntity");
+            if (in == null) {
+                in = requestContext.getRequest().getInputStream();
+            }
+            String body = StreamUtils.copyToString(in, Charset.forName("UTF-8"));
             Map<String,Object> map = new HashMap<>();
+
+            if(!StringUtils.isEmpty(body)) {
+                map= (Map)JSONObject.parseObject(body);
+            }
+
             map.put("username",username);
             map.put("userId",Integer.parseInt(userId));
             String mapStr = JSON.toJSONString(map);
