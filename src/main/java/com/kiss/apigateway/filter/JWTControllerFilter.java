@@ -84,8 +84,8 @@ public class JWTControllerFilter extends ZuulFilter {
                 map= (Map)JSONObject.parseObject(body);
             }
 
-            map.put("username",username);
-            map.put("userId",Integer.parseInt(userId));
+            map.put("GateUsername",username);
+            map.put("GateUserId",Integer.parseInt(userId));
             String mapStr = JSON.toJSONString(map);
 
             byte[] bytes = mapStr.getBytes("UTF-8");
