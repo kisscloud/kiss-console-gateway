@@ -42,8 +42,8 @@ public class JWTControllerFilter extends ZuulFilter {
     public boolean shouldFilter() {
         RequestContext requestContext = RequestContext.getCurrentContext();
         HttpServletRequest request = requestContext.getRequest();
-        String uri= request.getRequestURI();
-        if(!uri.contains("/login")) {
+        String uri = request.getRequestURI();
+        if (!uri.contains("/login")) {
             return true;
         }
         return false;
@@ -51,12 +51,12 @@ public class JWTControllerFilter extends ZuulFilter {
 
     @Override
     public Object run() throws ZuulException {
-        System.out.println("jwt的校验开始了");
+        System.out.println("【校验JWT】准备校验");
         RequestContext requestContext = RequestContext.getCurrentContext();
         HttpServletRequest request = requestContext.getRequest();
 
-        String token = request.getHeader("Authorization");
-        if(StringUtils.isEmpty(token)) {
+        String token = request.getHeader("X-Access-Token");
+        if (StringUtils.isEmpty(token)) {
             requestContext.setSendZuulResponse(false);
             requestContext.setResponseStatusCode(HttpStatus.SC_UNAUTHORIZED);
             return null;
@@ -66,13 +66,14 @@ public class JWTControllerFilter extends ZuulFilter {
         String username = JwtUtil.getUserName(token);
         String userId = JwtUtil.getUserId(token);
         Date expired = JwtUtil.getExpired(token);
-        if(expired.before(new Date())) {
+        if (expired.before(new Date())) {
             requestContext.setSendZuulResponse(false);
             requestContext.setResponseStatusCode(HttpStatus.SC_UNAUTHORIZED);
             return null;
         }
 
         try {
+
             InputStream in = (InputStream) requestContext.get("requestEntity");
             if (in == null) {
                 in = requestContext.getRequest().getInputStream();
