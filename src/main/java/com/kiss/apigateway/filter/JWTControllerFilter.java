@@ -56,6 +56,8 @@ public class JWTControllerFilter extends ZuulFilter {
         HttpServletRequest request = requestContext.getRequest();
 
         String token = request.getHeader("X-Access-Token");
+//        requestContext.setRequest();
+
         if (StringUtils.isEmpty(token)) {
             requestContext.setSendZuulResponse(false);
             requestContext.setResponseStatusCode(HttpStatus.SC_UNAUTHORIZED);
@@ -66,6 +68,7 @@ public class JWTControllerFilter extends ZuulFilter {
         String username = JwtUtil.getUserName(token);
         String userId = JwtUtil.getUserId(token);
         Date expired = JwtUtil.getExpired(token);
+
         if (expired.before(new Date())) {
             requestContext.setSendZuulResponse(false);
             requestContext.setResponseStatusCode(HttpStatus.SC_UNAUTHORIZED);
