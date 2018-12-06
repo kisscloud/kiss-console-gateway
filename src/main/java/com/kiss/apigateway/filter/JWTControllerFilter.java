@@ -8,9 +8,6 @@ import org.apache.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import utils.JwtUtil;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Date;
 
 
@@ -57,6 +54,7 @@ public class JWTControllerFilter extends ZuulFilter{
 
         //解析token获取用户信息
         Date expired = JwtUtil.getExpired(token);
+
         if (expired.before(new Date())) {
             requestContext.setSendZuulResponse(false);
             requestContext.setResponseStatusCode(HttpStatus.SC_UNAUTHORIZED);
