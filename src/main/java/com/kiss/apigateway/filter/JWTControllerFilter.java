@@ -35,7 +35,7 @@ public class JWTControllerFilter extends ZuulFilter{
         RequestContext requestContext = RequestContext.getCurrentContext();
         HttpServletRequest request = requestContext.getRequest();
         String uri = request.getRequestURI();
-        if (!uri.contains("/login")) {
+        if (!uri.contains("/login") || uri.contains("/root/check") || uri.contains("/root")) {
             return true;
         }
         return false;
