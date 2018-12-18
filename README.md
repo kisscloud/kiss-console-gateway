@@ -15,7 +15,7 @@ $ java -jar -Dspring.config.location=/opt/configs/kiss-console-gatewa/applicatio
 编辑配置文件：
 
 ```
-$ vim /opt/configs/kiss-console-gatewa/application.yml
+$ vim /opt/configs/kiss-console-gateway/application.yml
 ```
 
 配置文件内容：
