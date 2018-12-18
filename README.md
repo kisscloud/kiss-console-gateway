@@ -4,7 +4,7 @@
 
 ```
 $ git clone https://github.com/kisscloud/kiss-console-gateway.git
-$ cd kiss-console-gatewa
+$ cd kiss-console-gateway
 $ mvn install -Dmaven.test.skip=true
 $ mvn package -Dmaven.test.skip=true
 $ java -jar -Dspring.config.location=/opt/configs/kiss-console-gatewa/application.yml /opt/apps/kiss-console-gatewa/target/kiss-account-0.0.1-SNAPSHOT.jar
