@@ -3,11 +3,11 @@
 ## 1. 程序运行
 
 ```
-$ git clone github.com/kisscloud/kiss-console-gateway.git
-$ cd kiss-eureka-server
+$ git clone https://github.com/kisscloud/kiss-console-gateway.git
+$ cd kiss-console-gatewa
 $ mvn install -Dmaven.test.skip=true
 $ mvn package -Dmaven.test.skip=true
-$ java -jar -Dspring.config.location=/opt/configs/kiss-console-gateway/application.yml kiss-console-gateway.jar
+$ java -jar -Dspring.config.location=/opt/configs/kiss-console-gatewa/application.yml /opt/apps/kiss-console-gatewa/target/kiss-account-0.0.1-SNAPSHOT.jar
 ```
 
 ## 2. 配置文件
@@ -15,7 +15,7 @@ $ java -jar -Dspring.config.location=/opt/configs/kiss-console-gateway/applicati
 编辑配置文件：
 
 ```
-$ vim application.properties
+$ vim /opt/configs/kiss-console-gatewa/application.yml
 ```
 
 配置文件内容：
