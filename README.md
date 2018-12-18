@@ -23,7 +23,7 @@ $ vim application.properties
 # 服务名称
 spring:
   application:
-    name: kiss-api-gateway
+    name: kiss-console-gateway
 
 # 服务端口
 server:
