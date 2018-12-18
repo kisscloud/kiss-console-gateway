@@ -22,22 +22,16 @@ $ vim /opt/configs/kiss-console-gatewa/application.yml
 
 ```
 # 服务名称
-spring:
-  application:
-    name: kiss-console-gateway
+spring.application.name=kiss-api-gateway
 
 # 服务端口
-server:
-  port: 8100
+server.port=8100
 
 # 服务中心地址
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
+        
 
 # 超时配置
-ribbon:
-  ConnectTimeout: 60000
-  ReadTimeout: 60000
+ribbon.ConnectTimeout=60000
+ribbon.ReadTimeout=60000
 ```
