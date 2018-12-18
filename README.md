@@ -5,7 +5,8 @@
 ```
 $ git clone github.com/kisscloud/kiss-console-gateway.git
 $ cd kiss-eureka-server
-$ mvn package
+$ mvn install -Dmaven.test.skip=true
+$ mvn package -Dmaven.test.skip=true
 $ java -jar -Dspring.config.location=/opt/configs/kiss-console-gateway/application.yml kiss-console-gateway.jar
 ```
 
