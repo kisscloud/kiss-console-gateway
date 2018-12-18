@@ -6,7 +6,7 @@
 $ git clone github.com/kisscloud/kiss-console-gateway.git
 $ cd kiss-eureka-server
 $ mvn package
-$ java -j kiss-console-gateway.jar
+$ java -jar -Dspring.config.location=/opt/configs/kiss-console-gateway/application.yml kiss-console-gateway.jar
 ```
 
 ## 2. 配置文件
@@ -21,15 +21,22 @@ $ vim application.properties
 
 ```
 # 服务名称
-spring.application.name=kiss-api-gateway
+spring:
+  application:
+    name: kiss-api-gateway
 
 # 服务端口
-server.port=8100
+server:
+  port: 8100
 
 # 服务中心地址
-eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
 
 # 超时配置
-ribbon.ConnectTimeout=60000
-ribbon.ReadTimeout=60000
+ribbon:
+  ConnectTimeout: 60000
+  ReadTimeout: 60000
 ```
