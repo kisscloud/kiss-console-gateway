@@ -2,11 +2,11 @@ package com.kiss.apigateway.filter;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
+import kiss.foundation.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import utils.JwtUtil;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
@@ -32,7 +32,7 @@ public class JWTControllerFilter extends ZuulFilter{
         RequestContext requestContext = RequestContext.getCurrentContext();
         HttpServletRequest request = requestContext.getRequest();
         String uri = request.getRequestURI();
-        if (!uri.contains("/login") && !uri.contains("/root/check") && !uri.contains("/root")) {
+        if (!uri.contains("/login") && !uri.contains("/root/check") && !uri.contains("/root") && !uri.contains("/merchant")) {
             return true;
         }
         return false;
